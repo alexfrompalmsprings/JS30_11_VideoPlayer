@@ -25,3 +25,31 @@ function togglePlay(){
     video.pause();
   }
 }
+
+function updateButton(){
+  let icon = this.paused ? '►' : '❚ ❚';
+  console.log(icon)
+
+  toggle.textContent = icon;
+}
+
+function skip(){
+  console.log(this.dataset.skip);
+
+                      // converts it into a true number
+  video.currentTime += parseFloat(this.dataset.skip)
+}
+
+
+// event listeners
+video.addEventListener('click', togglePlay);
+
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+
+
+toggle.addEventListener('click', togglePlay)
+
+skipButtons.forEach(button => {
+  button.addEventListener('click', skip)
+});
