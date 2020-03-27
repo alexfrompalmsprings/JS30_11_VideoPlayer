@@ -52,7 +52,7 @@ function handleProgress() {
 }
 
 function scrub(e){
-  console.log(e)
+  // console.log(e)
               // (where did we drag it / the width) of the bar * DURATION of the video
   let scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
@@ -75,6 +75,14 @@ ranges.forEach(range => {
   range.addEventListener('change', updateVideoRange)
 });
 
+ranges.forEach(range => {
+  range.addEventListener('mousemove', updateVideoRange)
+});
+
 
 //allow the user to drag the bar
+let mousedown = false;
 progress.addEventListener('click', scrub);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
